@@ -26,12 +26,13 @@ USER keras
 # Python
 ARG python_version=3.5
 
-RUN conda install -y python=${python_version} && \
-    pip install --upgrade pip && \
-    conda install Pillow scikit-learn notebook pandas matplotlib mkl nose pyyaml six h5py pydot3 tensorflow && \
-    git clone git://github.com/fchollet/keras.git /src && pip install -e /src[tests] && \
-    pip install git+git://github.com/fchollet/keras.git && \
-    conda clean -yt
+RUN conda install -y python=${python_version}
+RUN pip install --upgrade pip 
+RUN conda install Pillow scikit-learn notebook pandas matplotlib mkl nose pyyaml six h5py tensorflow 
+RUN pip install pydot3
+RUN git clone git://github.com/fchollet/keras.git /src 
+RUN pip install git+git://github.com/fchollet/keras.git 
+RUN conda clean -yt
 
 ENV PYTHONPATH='/src/:$PYTHONPATH'
 
